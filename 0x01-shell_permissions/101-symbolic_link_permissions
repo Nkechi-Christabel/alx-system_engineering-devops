@@ -1,2 +1,2 @@
 #!/bin/bash
-chown -h vincent:staff _hello
+if[stat -c '%U' -eq "guillaume"]; then sudo chown betty hello
