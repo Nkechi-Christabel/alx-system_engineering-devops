@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lt | grep '^-' | head -n 10
+ls -t | grep -v '^d' | head -n 10
