@@ -1,2 +1,2 @@
 #!/bin/bash
-awk '{printf "%s", $1} END {print ""}'
+echo $(sed 's/^\(.\).*$/\1/' | tr -d '\n')
