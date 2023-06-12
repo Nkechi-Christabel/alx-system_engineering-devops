@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(tr -s ' ' '\n' | cut -c 1)"$'\n'
+awk '{printf "%s", $1} END {print ""}'
