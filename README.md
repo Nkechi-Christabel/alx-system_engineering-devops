@@ -1,1 +1,2 @@
-To be updated with the details about shell
+<h1>Welcome to the Matrix!</h1>
+<img src="https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2021/2/cdc24ca146228a91564ccd17686cf1d13764896e.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20230624%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230624T215323Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=bf9afaa9ac6b73671c21c826b4f2c6b08d87df6ab00937dc5c79aa406c2f0bb7" alt="number codes"/>
