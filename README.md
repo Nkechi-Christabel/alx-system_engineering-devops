@@ -24,19 +24,26 @@ In your terminal:
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
 <h2>General</h2>
-How to navigate in a Unix system
-How to list files and directories
-How to display the content of a file
-How to create a file or directory
-How to remove a file or directory
-How to move or copy a file or directory
-Copyright - Plagiarism
-You are tasked to come up with solutions for the tasks below yourself to meet the above learning objectives.
-You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
-You are not allowed to publish any content of this project.
-Any form of plagiarism is strictly forbidden and will result in removal from the program.
+<ul>
+<li>How to navigate in a Unix system</li>
+<li>How to list files and directories</li>
+<li>How to display the content of a file</li>
+<li>How to create a file or directory</li>
+<li>How to remove a file or directory</li>
+<li>How to move or copy a file or directory</li>
+</ul>
+  
+<h2>Copyright - Plagiarism</h2>
+<ul>
+<li>You are tasked to come up with solutions for the tasks below yourself to meet the above learning objectives.</li>
+<li>You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.</li>
+<li>You are not allowed to publish any content of this project.</li>
+<li>Any form of plagiarism is strictly forbidden and will result in removal from the program.</li>
+</ul>
 
 <h2>Requirements</h2>
-All tasks must be done inside the sandbox Ubuntu 20.04
-Your sandbox must be available at the end of this project - the Checker will have access to it at midnight for running the correction!
-It’s recommended to start the project on a fresh new Sandbox
+<ul>
+<li>All tasks must be done inside the sandbox Ubuntu 20.04</li>
+<li>Your sandbox must be available at the end of this project - the Checker will have access to it at midnight for running the correction!</li>
+<li>It’s recommended to start the project on a fresh new Sandbox</li>
+</ul>
