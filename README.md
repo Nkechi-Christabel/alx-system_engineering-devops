@@ -4,6 +4,22 @@
 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhM8L-xfgtaNg6ViKF_4ofTK8Cof5RBinl2i_Dr1fXB_xCMBhIFIkDk-p2BPwWbRhIgvcHckEde46U9rZZFh8VgWESAz0MKPKia5JV5Iq9wJuRuUakDZYE5DQ0ms5J3R3iDnbRJHB9A69-9zDSC5nyR1IeFnwNYE7S08yhI-f8zYXjhsA4vU1uOsw/w320-h237/Termuax.gif"  width="100%" height="auto" alt="number codes"/>
 </div>
 
+
+<h2>Resources</h2>
+In your terminal:
+<ul>
+<li>man pwd</li>
+<li>man ls</li>
+<li>man cd</li>
+<li>man less</li>
+<li>man touch</li>
+<li>man cp</li>
+<li>man mv</li>
+<li>man rm</li>
+<li>man mkdir</li>
+<li>man rmdir</li>
+</ul>
+
 <h2>Learning Objectives</h2>
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
