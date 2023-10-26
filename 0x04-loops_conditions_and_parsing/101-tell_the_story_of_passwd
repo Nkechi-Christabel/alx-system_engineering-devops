@@ -2,10 +2,9 @@
 # Makes up and isplays a story based on the content of the file
 # /etc/passwd, using the while loop + IFS.
 
-file="/etc/passwd"
 
 while IFS=: read -r username password userid groupname homedir shell; do
   echo "The user $username is part of the $groupname gang, lives in $homedir, and rides $shell."
   echo "USER ID's place is protected by the passcode $password, more info about the user here: USER ID INFO"
   echo
-done < "$file"
+done < "/etc/passwd"
