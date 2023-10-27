@@ -29,10 +29,10 @@ int main(void)
 	for (i = 0; i < 5; i++)
 	{
 		zombie_pid = fork();
-		if (!zombie_pid)
+		if (zombie_pid == -1)
 			exit(0);
 
-		printf("Zombie process created, PID: %d\n", getpid());
+		printf("Zombie process created, PID: %d\n", zombie_pid);
 	}
 
 	infinite_while();
