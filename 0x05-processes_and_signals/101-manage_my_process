@@ -1,21 +1,46 @@
 #!/usr/bin/env bash
-# Manages 'manage_my_process'
+# It manages the script manage_my_process.
+   ## When passing the argument start:
+        ### Starts manage_my_process
+        ### Creates a file containing its PID in /var/run/my_process.pid
+        ### Displays manage_my_process started
+   ## When passing the argument stop:
+        ### Stops manage_my_process
+        ### Deletes the file /var/run/my_process.pid
+        ### Displays manage_my_process stopped
+   ## When passing the argument restart:
+        ### Stops manage_my_process
+        ### Deletes the file /var/run/my_process.pid
+        ### Starts manage_my_process
+        ### Creates a file containing its PID in /var/run/my_process.pid
+        ### Displays manage_my_process restarted
+   ## Displays Usage: manage_my_process {start|stop|restart} if any other
+   ## argument or no argument is passed
+      
 
-case "$1" in
-    start)
-        /path/to/manage_my_process start
-        ;;
-
-    stop)
-        /path/to/manage_my_process stop
-        ;;
-
-    restart)
-        /path/to/manage_my_process restart
-        ;;
-
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
+if [[ "$#" == "1" ]]; then
+  if [[ "$1" == "start" ]]; then
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process started"
+  elif [[ "$1" == "stop" ]]; then
+    if test -f "/var/run/my_process.pid"; then
+      kill "$(cat /var/run/my_process.pid)"
+    fi
+    rm /var/run/my_process.pid
+    echo "manage_my_process stopped"
+  elif [[ "$1" == "restart" ]]; then
+    # stop program
+    if test -f "/var/run/my_process.pid"; then
+      kill "$(cat /var/run/my_process.pid)"
+    fi
+    # start program
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+  else
+    echo "Usage: manage_my_process {start|stop|restart}"
+  fi
+else
+  echo "Usage: manage_my_process {start|stop|restart}"
+fi

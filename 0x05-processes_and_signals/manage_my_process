@@ -2,36 +2,7 @@
 # Prints "I am alive" infinite times to /tmp/my_process
 # With a sleep 2 (Pause) in between each iteration.
 
-case "$1" in
-    start)
-        if [ -f /var/run/my_process.pid ]; then
-            echo "manage_my_process is already running."
-            exit 1
-        fi
-        nohup sh -c "while true; do echo 'I am alive!' > /tmp/my_process; sleep 2; done" &
-        echo $! > /var/run/my_process.pid
-        echo "manage_my_process started"
-        ;;
-
-    stop)
-        if [ -f /var/run/my_process.pid ]; then
-            kill $(cat /var/run/my_process.pid)
-            rm /var/run/my_process.pid
-            echo "manage_my_process stopped"
-        else
-            echo "manage_my_process is not running."
-        fi
-        ;;
-
-    restart)
-        $0 stop
-        $0 start
-        echo "manage_my_process restarted"
-        ;;
-
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
-
+while true; do
+  echo 'I am alive!' >> "/tmp/my_process";
+  sleep 2;
+done
