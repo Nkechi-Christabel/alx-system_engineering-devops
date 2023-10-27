@@ -32,11 +32,10 @@ int main(void)
 		if (zombie_pid == -1)
 		{
 			perror("Fork error");
-			exit(1);
+			exit(0);
 		}
 
 		printf("Zombie process created, PID: %d\n", getpid());
-		exit(0);
 	}
 
 	infinite_while();
