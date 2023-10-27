@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Prints "I am alive" infinite times to /tmp/my_process
+# With a sleep 2 (Pause) in between each iteration.
+
+while true; do
+  echo "I am alive!" >> /tmp/my_process
+  sleep 2
+done
