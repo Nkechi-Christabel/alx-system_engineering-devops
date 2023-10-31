@@ -7,7 +7,7 @@ expression library that which is used by Ruby by default. Note that other regula
 libraries sometimes have different properties.</p>
 <p>Because the focus of this exercise is to play with regular expressions (regex), here is
 the Ruby code that you should use, just replace the regexp part, meaning the code in between the
-<span style="color:red;"><code>//</code></span>:
+<code style="color:red;">//</code>:
 <pre>
 <code>
 sylvain@ubuntu$ cat example.rb
