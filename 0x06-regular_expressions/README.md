@@ -6,8 +6,7 @@
 expression library that which is used by Ruby by default. Note that other regular expression
 libraries sometimes have different properties.</p>
 <p>Because the focus of this exercise is to play with regular expressions (regex), here is
-the Ruby code that you should use, just replace the regexp part, meaning the code in between the
-<code style="color:red;">//</code>:
+the Ruby code that you should use, just replace the regexp part, meaning the code in between the <code>//</code>:
 <pre>
 <code>
 sylvain@ubuntu$ cat example.rb
