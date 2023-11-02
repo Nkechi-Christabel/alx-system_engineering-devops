@@ -95,11 +95,3 @@ sylvain@ubuntu$ cat foo_answer_file
 sylvain@ubuntu$
 
 ```
-
-<pre>
-<code>
-sylvain@ubuntu$ cat foo_answer_file
-3
-sylvain@ubuntu$
-</pre>
-</code>
