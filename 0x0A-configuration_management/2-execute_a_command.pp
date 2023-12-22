@@ -3,5 +3,5 @@
 exec { 'pkill':
   command  => 'pkill -f killmenow',
   provider => 'shell',
-  onlyif  => 'pgrep -f killmenow'
+  onlyif   => 'pgrep -f killmenow'
 }
