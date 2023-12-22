@@ -9,7 +9,9 @@ Configuration management tools, like Puppet, provide a way to automate this proc
 
 Puppet is a configuration management tool that allows you to define your infrastructure as code. This means that you can write code to describe how your infrastructure should be configured, and Puppet will automatically enforce that configuration across all the systems it manages.
 
-Puppet uses a client-server architecture, where a Puppet master server controls a fleet of Puppet agents running on managed nodes. The Puppet master server holds the configuration data, while the Puppet agents apply the configurations to the nodes they manage.
+Puppet uses a client-server architecture, where a Puppet master server controls a fleet of Puppet
+agents running on managed nodes. The Puppet master server holds the configuration data, while the
+Puppet agents apply the configurations to the nodes they manage.
 
 ## Project Requirements
 
