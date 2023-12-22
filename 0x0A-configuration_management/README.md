@@ -11,6 +11,8 @@ Puppet is a configuration management tool that allows you to define your infrast
 
 Puppet uses a client-server architecture, where a Puppet master server controls a fleet of Puppet agents running on managed nodes. The Puppet master server holds the configuration data, while the Puppet agents apply the configurations to the nodes they manage.
 
+## Project Requirements
+
 - All your files will be interpreted on `Ubuntu 20.04 LTS`
 - All your files should end with a new line
 - A __README.md__ file at the root of the folder of the project is mandatory
