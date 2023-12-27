@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# These commands configures  SSH configuration file so that one
+# can connect to a server without typing a password.
+
+Host *
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
