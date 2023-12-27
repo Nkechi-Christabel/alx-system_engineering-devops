@@ -3,7 +3,9 @@
 <img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-sysadmin_devops/244/zPVRKhPsUP5lK.gif" width="100%">
 
 ## About
-SSH, which stands for Secure Shell, is a network protocol that provides a secure way to access and manage remote computers over an unsecured network, such as the internet. With SSH, you can establish a secure, encrypted connection between two devices, and remotely execute commands, transfer files, or tunnel other network traffic. SSH is widely used by system administrators, developers, and other users who need to remotely access and manage servers, routers, and other network devices. Lets get cracking.
+The most common way of connecting to a remote Linux server is through SSH. SSH stands for Secure Shell and provides a safe and secure way of executing commands, making changes, and configuring services remotely. When you connect through SSH, you log in using an account that exists on the remote server.
+
+The Secure Shell Protocol (SSH) is a cryptographic network protocol for operating network services securely over an unsecured network. SSH applications are based on a client–server architecture, connecting an SSH client instance with an SSH server.
 
 ## Resources
 __Read or Watch__:
