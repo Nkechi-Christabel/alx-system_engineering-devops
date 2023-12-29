@@ -1,4 +1,3 @@
-include stdlib
 # It sets up the client's SSH configuration file so that you can
 # connect to a server without typing a password.
 
