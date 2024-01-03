@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Configures the Nginx server so that /redirect_me is redirecting
+# to another page.
+
+apt-get update -y
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
+sed -i '/location \/ {/a \
+location /redirect_me { \
+ return 301 http://www.example.com/new-page; \
+}' /etc/nginx/sites-available/default
+nginx -s stop
+nginx
