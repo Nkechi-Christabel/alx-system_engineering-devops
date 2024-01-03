@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Installs nginx on web-01 server and listens on port 80
+# Returns a page that contains the string Hello World! when queried.
+
+apt-get update -y
+apt-get install -y nginx
+
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+</body>
+</html>" | sudo tee /var/www/html/index.html
+nginx -s stop
+nginx
+curl -I localhost
