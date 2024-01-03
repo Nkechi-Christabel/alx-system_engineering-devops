@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Runs Apache in a container and returns a page containing Hello
+# Holberton when querying the root of it.
+
+echo "ServerName localhost" >> /etc/apache2.conf
+service apache2 start
