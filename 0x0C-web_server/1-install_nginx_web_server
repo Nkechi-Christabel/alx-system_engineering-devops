@@ -4,7 +4,6 @@
 
 apt-get update -y
 apt-get install -y nginx
-sudo ufw allow "Nginx HTTP"
 echo "<!DOCTYPE html>
 <html>
 <head>
