@@ -15,4 +15,3 @@ echo "<!DOCTYPE html>
 </body>
 </html>" | sudo tee /var/www/html/index.html
 service nginx restart
-curl -I localhost
