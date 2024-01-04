@@ -13,7 +13,7 @@ file_line { 'Add redirection, 301':
 }
 
 file { '/var/www/html/index.html':
-  content => 'Holberton School',
+  content => 'Hello World!',
 }
 
 service { 'nginx':
