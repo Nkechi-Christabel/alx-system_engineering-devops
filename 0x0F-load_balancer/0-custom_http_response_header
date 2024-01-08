@@ -1,9 +1,7 @@
-#!/bin/bash
-# This script Configures Nginx so that its HTTP response contains a custom
-# header X-Served-By (on web-01 and web-02).
+#!/usr/bin/env bash
+sudo apt update
+sudo apt install nginx -y
 
-sudo apt-get -y
-sudo apt-get -y install nginx
-
-sudo sed -i "42i add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default
-sudo service nginx restart
+grep -q "add_header X-Served-By \$hostname;" /etc/nginx/sites-available/default ||
+  sudo sed -i "/^server {/a\        add_header X-Served-By \$hostname;\n" /etc/nginx/sites-available/default
+sudo nginx -t && sudo service nginx restart
