@@ -1,22 +1,30 @@
 # It automates the task of creating a custom HTTP header response.
 
-package { 'nginx':
-  ensure => installed,
+$str = "add_header X-Served-By ${hostname};"
+
+exec { 'update':
+  command => '/usr/bin/apt-get update',
 }
-
-$hostname = $::hostname
-
-augeas { 'nginx_custom_header':
-  context => '/etc/nginx/sites-available/default/',
-  changes => [
-    "set add_header 'X-Served-By $hostname'",
-  ],
-  notify => Service['nginx'],
+-> package { 'nginx':
+  ensure  => installed,
+  require => Exec['update']
+}
+-> file_line { 'Add redirection, 301':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+}
+-> file_line { 'Add custom HTTP server':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server;',
+  line   => $str,
+}
+-> file { '/var/www/html/index.html':
+  content => 'Holberton School',
+}
+-> service { 'nginx':
+  ensure  => running,
   require => Package['nginx'],
-}
-
-service { 'nginx':
-  ensure    => running,
-  enable    => true,
-  subscribe => Augeas['nginx_custom_header'],
 }
