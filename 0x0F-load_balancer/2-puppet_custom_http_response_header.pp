@@ -7,7 +7,7 @@ package { 'nginx':
 $hostname = $::hostname
 
 augeas { 'nginx_custom_header':
-  context => '/files/etc/nginx/sites-available/default/server',
+  context => '/etc/nginx/sites-available/default/',
   changes => [
     "set add_header 'X-Served-By $hostname'",
   ],
