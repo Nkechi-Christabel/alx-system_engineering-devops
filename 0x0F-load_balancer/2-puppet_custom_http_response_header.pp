@@ -1,6 +1,5 @@
 # It automates the task of creating a custom HTTP header response.
 
-class nginx_custom_header {
   package { 'nginx':
     ensure => installed,
   }
@@ -16,4 +15,3 @@ class nginx_custom_header {
     ensure => running,
     enable => true,
   }
-}
