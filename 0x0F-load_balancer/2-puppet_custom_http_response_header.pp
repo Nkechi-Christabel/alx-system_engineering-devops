@@ -1,17 +1,22 @@
 # It automates the task of creating a custom HTTP header response.
 
-  package { 'nginx':
-    ensure => installed,
-  }
+package { 'nginx':
+  ensure => installed,
+}
 
-  file { '/etc/nginx/conf.d/custom_header.conf':
-    ensure  => file,
-    content => 'add_header X-Served-By $hostname;',
-    require => Package['nginx'],
-    notify  => Service['nginx'],
-  }
+$hostname = $::hostname
 
-  service { 'nginx':
-    ensure => running,
-    enable => true,
-  }
+augeas { 'nginx_custom_header':
+  context => '/files/etc/nginx/sites-available/default/server',
+  changes => [
+    "set add_header 'X-Served-By $hostname'",
+  ],
+  notify => Service['nginx'],
+  require => Package['nginx'],
+}
+
+service { 'nginx':
+  ensure    => running,
+  enable    => true,
+  subscribe => Augeas['nginx_custom_header'],
+}
