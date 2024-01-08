@@ -1,0 +1,9 @@
+#!/bin/bash
+# This script Configures Nginx so that its HTTP response contains a custom header X-Served-By (on web-01 and web-02)
+sudo apt update
+sudo apt install nginx -y
+sudo sed -i "/server {/a \  add_header X-Served-By \$hostname;\n" /etc/nginx/sites-available/default
+
+if sudo nginx -t; then
+  sudo systemctl reload nginx
+fi
