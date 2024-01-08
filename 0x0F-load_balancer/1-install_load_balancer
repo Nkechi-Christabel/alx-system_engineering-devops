@@ -15,5 +15,5 @@ backend web_servers
     server web-02 54.174.70.150:80 check
 EOF
 
-sudo systemctl restart haproxy
-sudo systemctl enable haproxy
+sudo service haproxy restart
+sudo update-rc.d haproxy enable
