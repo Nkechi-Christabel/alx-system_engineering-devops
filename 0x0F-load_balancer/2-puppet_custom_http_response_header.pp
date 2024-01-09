@@ -1,7 +1,5 @@
 # It automates the task of creating a custom HTTP header response.
 
-$str = "add_header X-Served-By ${hostname};"
-
 exec { 'update':
   command => '/usr/bin/apt-get update',
 }
@@ -19,10 +17,10 @@ exec { 'update':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
-  line   => $str,
+  line   => "add_header X-Served-By ${hostname};"
 }
 -> file { '/var/www/html/index.html':
-  content => 'Holberton School',
+  content => 'Hello World!',
 }
 -> service { 'nginx':
   ensure  => running,
