@@ -6,8 +6,7 @@ exec { 'update':
 -> package { 'nginx':
   ensure  => installed,
 }
--> file_line { 'Add custom HTTP server':
-  ensure => 'present',
+-> file_line { 'Add a custom Header':
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
   line   => "add_header X-Served-By ${hostname};"
