@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 # This script automates and configures Nginx  to listen on port 80
 
-ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-sudo service nginx start
+
+sudo apt-get update
+sudo apt-get install -y net-tools nginx
+
+if sudo ss -tulpn | grep ":80"; then
+    echo "Nginx is already listening on port 80."
+else
+    if sudo nginx -t; then
+        sudo systemctl restart nginx
+        echo "Nginx restarted and now listening on port 80."
+    else
+        echo "Nginx configuration has errors. Please fix them before running this script."
+    fi
+fi
+
