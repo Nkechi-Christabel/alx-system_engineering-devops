@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# It configures your domain zone so that the subdomain www points to
+# your load-balancer IP (lb-01
+
+function get_subdomain_info() {
+  local domain=$1
+  local subdomain=$2
+  local record_type=$(dig +short $subdomain.$domain | awk '{print $4}')
+  local destination=$(dig +short $subdomain.$domain | awk '{print $5}')
+  echo "The subdomain $subdomain is a $record_type record and points to $destination"
+}
+
+if [[ $# -eq 1 ]]; then
+  for subdomain in www lb-01 web-01 web-02; do
+    get_subdomain_info $1 $subdomain
+  done
+else
+  get_subdomain_info $1 $2
+fi
