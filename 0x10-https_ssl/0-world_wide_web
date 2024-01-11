@@ -3,7 +3,6 @@
 # your load-balancer IP (lb-01
 
 
-
 display_info() {
     local domain="$1"
     local subdomain="$2"
