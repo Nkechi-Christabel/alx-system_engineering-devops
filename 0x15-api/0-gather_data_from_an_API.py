@@ -23,4 +23,4 @@ if __name__ == "__main__":
         print(f"Employee {user['name']} is done with tasks"
               f"({len(completed_tasks)}/{tasks_len}):")
         for task in completed_tasks:
-            print(f"\t{task['title']}")
+            print(f"\t {task['title']}")
