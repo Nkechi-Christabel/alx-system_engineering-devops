@@ -28,5 +28,5 @@ if __name__ == "__main__":
                 'USER_ID': user_id,
                 'USERNAME': username,
                 'TASK_COMPLETED_STATUS': task.get('completed'),
-                'TASK_TITLE': taask.get('title')
+                'TASK_TITLE': task.get('title')
             })
