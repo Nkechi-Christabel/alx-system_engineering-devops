@@ -22,11 +22,6 @@ if __name__ == "__main__":
                       'TASK_TITLE']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
                                 quoting=csv.QUOTE_ALL)
-
-        for task in todos:
-            writer.writerow({
-                'USER_ID': user_id,
-                'USERNAME': user.get('username'),
-                'TASK_COMPLETED_STATUS': task.get('completed'),
-                'TASK_TITLE': task.get('title')
-            })
+        [writer.writerow(
+            [user_id, username, t.get("completed"), t.get("title")]
+         ) for t in todos]
