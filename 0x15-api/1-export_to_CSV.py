@@ -11,10 +11,10 @@ from sys import argv
 if __name__ == "__main__":
     user_id = int(argv[1])
     baseUrl = "https://jsonplaceholder.typicode.com/"
-    todos_res = requests.get(f'{baseUrl}users/user_id/todos')
+    todos_res = requests.get(f"{baseUrl}users/{user_id}/todos")
     user_res = requests.get(f"{baseUrl}users/{user_id}")
 
-    if todo_res.status_code == 200 and user_res.status_code == 200:
+    if todos_res.status_code == 200 and user_res.status_code == 200:
         todos, user = todos_res.json(), user_res.json()
 
     with open(f"{user_id}.csv", 'w', newline='') as csvfile:
