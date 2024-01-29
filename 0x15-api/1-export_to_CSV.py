@@ -14,8 +14,7 @@ if __name__ == "__main__":
     todos_res = requests.get(f'{baseUrl}users/{user_id}/todos')
     user_res = requests.get(f"{baseUrl}users/{user_id}")
 
-    if todos_res.status_code == 200 and user_res.status_code == 200:
-        todos, user = todos_res.json(), user_res.json()
+    todos, user = todos_res.json(), user_res.json()
 
     with open(f'{user_id}.csv', 'w') as file:
         for task in todos:
