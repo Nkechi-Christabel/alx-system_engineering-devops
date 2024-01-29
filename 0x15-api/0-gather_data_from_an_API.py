@@ -20,7 +20,7 @@ if __name__ == "__main__":
                            and task['completed']]
         tasks_len = sum(1 for task in todo if task['userId'] == user_id)
 
-        print(f"Employee {user['name']} is done with tasks\
-              ({len(completed_tasks)}/{tasks_len}):")
+        print(f"Employee {user['name']} is done with tasks"
+              f"({len(completed_tasks)}/{tasks_len}):")
         for task in completed_tasks:
             print(f"\t{task['title']}")
