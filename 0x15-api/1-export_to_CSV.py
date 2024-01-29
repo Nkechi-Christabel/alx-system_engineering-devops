@@ -22,7 +22,6 @@ if __name__ == "__main__":
                       'TASK_TITLE']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-        writer.writeheader()
         for task in todos:
             writer.writerow({
                 'USER_ID': user_id,
