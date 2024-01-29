@@ -17,7 +17,9 @@ if __name__ == "__main__":
     if todos_res.status_code == 200 and user_res.status_code == 200:
         todos, user = todos_res.json(), user_res.json()
 
-    json_data = {str(user_id): [{"task": task['title'], "completed": task['completed'],
-                                "username": user.get('username')} for task in todos]}
+    json_data = {str(user_id): [{"task": task['title'], "completed":
+                 task['completed'], "username": user.get('username')}
+                 for task in todos]}
+
     with open(f"{user_id}.json", 'w') as jsonfile:
         json.dump(json_data, jsonfile)
