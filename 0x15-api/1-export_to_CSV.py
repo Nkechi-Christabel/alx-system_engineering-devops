@@ -15,7 +15,7 @@ if __name__ == "__main__":
     user_res = requests.get(f"{baseUrl}users/{user_id}")
 
     if todos_res.status_code == 200 and user_res.status_code == 200:
-        todos  = todos_res.json()
+        todos = todos_res.json()
         username = user_res.json().get('username')
 
     with open(f"{user_id}.csv", 'w', newline='') as csvfile:
@@ -27,6 +27,6 @@ if __name__ == "__main__":
             writer.writerow({
                 'USER_ID': user_id,
                 'USERNAME': username,
-                'TASK_COMPLETED_STATUS': 'Completed' if task['completed'] else 'Not Completed',
-                'TASK_TITLE': task['title']
+                'TASK_COMPLETED_STATUS': task.get('completed')
+                'TASK_TITLE': task.get('title')
             })
