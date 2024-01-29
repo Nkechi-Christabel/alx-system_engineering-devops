@@ -15,7 +15,8 @@ if __name__ == "__main__":
     user_res = requests.get(f"{baseUrl}users/{user_id}")
 
     if todos_res.status_code == 200 and user_res.status_code == 200:
-        todos, user = todos_res.json(), user_res.json()
+        todos  = todos_res.json()
+        username = user_res.json().get('username')
 
     with open(f"{user_id}.csv", 'w', newline='') as csvfile:
         fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS',
