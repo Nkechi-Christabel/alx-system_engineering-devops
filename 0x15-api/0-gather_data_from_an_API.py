@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Using the provided REST API and the given ID, returns information about
+Using the provided REST API and the given ID, returns
+information about his/her TODO list progress.
 """
 import requests
 from sys import argv
