@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
-Uses the provided REST API and the given ID, returns information about
-his/her TODO list progress.
+Using the provided REST API and the given ID, returns information about
 """
 import requests
 from sys import argv
+
 
 if __name__ == "__main__":
     user_id = int(argv[1])
