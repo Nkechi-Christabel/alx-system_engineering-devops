@@ -18,7 +18,7 @@ if __name__ == "__main__":
         todos, user = todos_res.json(), user_res.json()
         todos = [task for task in todos if task['userId'] == user_id]
 
-    with open(f"{user_id}.csv", 'w', newline='') as csvfile:
+    with open("{}.csv".format(user_id), 'w', newline='') as csvfile:
         fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS',
                       'TASK_TITLE']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
