@@ -9,9 +9,9 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    user_id = int(argv[1])
+    user_id = argv[1]
     baseUrl = "https://jsonplaceholder.typicode.com/"
-    todos_res = requests.get(f'{baseUrl}users/{user_id}/todos')
+    todos_res = requests.get(f"{baseUrl}users/{user_id}/todos")
     user_res = requests.get(f"{baseUrl}users/{user_id}")
 
     if todos_res.status_code == 200 and user_res.status_code == 200:
