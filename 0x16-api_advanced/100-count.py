@@ -1,49 +1,54 @@
 #!/usr/bin/python3
-"""
-A module containing a recursive function to query the Reddit API and count
-occurrences of given keywords in the titles of hot articles for a given
-subreddit.
-"""
+""" raddit api"""
+
+import json
 import requests
 
 
-def count_words(subreddit, word_list, counts=None, after=None):
-    """
-    Recursively queries the Reddit API to count occurrences of given keywords
-    in the titles of hot articles for a given subreddit.
+def count_words(subreddit, word_list, after="", count=[]):
+    """count all words"""
 
-    Args:
-        subreddit (str): The name of the subreddit.
-        word_list (list): A list of keywords to count occurrences of in the
-                          titles.
-        counts (dict, optional): A dictionary to store the counts of each
-                                 keyword. Defaults to None.
-        after (str, optional): Parameter to paginate through the results.
-                               Defaults to None.
-    """
-    if counts is None:
-        counts = {}
+    if after == "":
+        count = [0] * len(word_list)
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {'User-Agent': 'Custom User Agent'}
-    params = {'limit': 100, 'after': after} if after else {'limit': 100}
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    request = requests.get(url,
+                           params={'after': after},
+                           allow_redirects=False,
+                           headers={'user-agent': 'bhalut'})
 
-    if response.status_code == 200:
-        data = response.json().get('data')('children')
-        for post in data:
-            title = post.get('data').get('title')
-            for word in word_list:
-                if word.lower() in title.lower().split():
-                    counts[word.lower()] = counts.get(word.lower(), 0) + 1
+    if request.status_code == 200:
+        data = request.json()
 
-        after = data.get('data').get('after')
-        if after:
-            count_words(subreddit, word_list, counts, after)
+        for topic in (data['data']['children']):
+            for word in topic['data']['title'].split():
+                for i in range(len(word_list)):
+                    if word_list[i].lower() == word.lower():
+                        count[i] += 1
+
+        after = data['data']['after']
+        if after is None:
+            save = []
+            for i in range(len(word_list)):
+                for j in range(i + 1, len(word_list)):
+                    if word_list[i].lower() == word_list[j].lower():
+                        save.append(j)
+                        count[i] += count[j]
+
+            for i in range(len(word_list)):
+                for j in range(i, len(word_list)):
+                    if (count[j] > count[i] or
+                            (word_list[i] > word_list[j] and
+                             count[j] == count[i])):
+                        aux = count[i]
+                        count[i] = count[j]
+                        count[j] = aux
+                        aux = word_list[i]
+                        word_list[i] = word_list[j]
+                        word_list[j] = aux
+
+            for i in range(len(word_list)):
+                if (count[i] > 0) and i not in save:
+                    print("{}: {}".format(word_list[i].lower(), count[i]))
         else:
-            sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_counts:
-                print(f"{word}: {count}")
-    else:
-        print("Invalid subreddit or no matching posts found.")
+            count_words(subreddit, word_list, after, count)
