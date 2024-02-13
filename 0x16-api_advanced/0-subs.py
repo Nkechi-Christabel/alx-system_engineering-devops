@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-"""queries the Reddit API"""
+"""
+number of subs
+"""
+
 import requests
 
 
 def number_of_subscribers(subreddit):
-    """returns total subs"""
-    header = {"User-Agent": "Holberton"}
-    url = "https://www.reddit.com/r/" + subreddit + "/about.json"
-    r = requests.get(url, headers=header)
-    if r.status_code == 200:
-        return r.json().get("data", None).get("subscribers", None)
-    else:
+    """returns the number of subscribers"""
+    if subreddit is None or type(subreddit) is not str:
         return 0
-
-if __name__ == "__main__":
-    pass
+    r = requests.get('http://www.reddit.com/r/{}/about.json'.format(subreddit),
+                     headers={'User-Agent': 'Python/requests:APIproject:\
+v1.0.0 (by u/riskiebiznu)'}).json()
+    subs = r.get("data", {}).get("subscribers", 0)
+    return subs
