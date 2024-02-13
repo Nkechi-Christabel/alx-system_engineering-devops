@@ -16,17 +16,16 @@ def number_of_subscribers(subreddit):
     Returns:
         int: The number of subscribers of the subreddit. Returns 0 if the
              subreddit is invalid or not found.
-
-    Raises:
-        None
-
     """
+    if subreddit is None or not isinstance(subreddit, str):
+        return 0
+
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {'User-Agent': 'Custom User Agent'}
     response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code == 200:
         data = response.json()
-        return data.get('data', None).get('subscribers', None)
+        return data.get('data').get('subscribers', None)
     else:
         return 0
