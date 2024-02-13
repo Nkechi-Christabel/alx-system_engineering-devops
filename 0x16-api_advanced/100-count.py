@@ -7,43 +7,38 @@ subreddit.
 import requests
 
 
-def count_words(subreddit, word_list, counts=None, after=None):
-    """
-    Recursively queries the Reddit API to count occurrences of given keywords
-    in the titles of hot articles for a given subreddit.
+def recurse(subreddit, word_list, after="", dic={}):
+    """recursive function"""
+    base_url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    h = {'User-Agent': 'Reddit API test'}
+    params = {'limit': 200, 'after': after}
+    r = requests.get(base_url, headers=h, allow_redirects=False, params=params)
+    if r.status_code != 200:
+        return None
+    d = r.json()
+    if after is None:
+        return dic
+    l = d.get('data', {}).get('children')
+    for i in l:
+        title = i.get('data', {}).get('title').lower().split()
+        for j in word_list:
+            for t in title:
+                if j == t:
+                    if j not in dic:
+                        dic[j] = 1
+                    else:
+                        dic[j] += 1
+    p = d.get('data', {}).get('after')
+    return recurse(subreddit, word_list, p, dic)
 
-    Args:
-        subreddit (str): The name of the subreddit.
-        word_list (list): A list of keywords to count occurrences of in the
-                          titles.
-        counts (dict, optional): A dictionary to store the counts of each
-                                 keyword. Defaults to None.
-        after (str, optional): Parameter to paginate through the results.
-                               Defaults to None.
-    """
-    if counts is None:
-        counts = {}
 
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {'User-Agent': 'Custom User Agent'}
-    params = {'limit': 100, 'after': after} if after else {'limit': 100}
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
-
-    if response.status_code == 200:
-        data = response.json().get('data')('children')
-        for post in data:
-            title = post.get('data').get('title')
-            for word in word_list:
-                if word.lower() in title.lower().split():
-                    counts[word.lower()] = counts.get(word.lower(), 0) + 1
-
-        after = data.get('data').get('after')
-        if after:
-            count_words(subreddit, word_list, counts, after)
-        else:
-            sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
-            for word, count in sorted_counts:
-                print(f"{word}: {count}")
-    else:
-        print("Invalid subreddit or no matching posts found.")
+def count_words(subreddit, word_list):
+    """Cound # of keywords"""
+    for i, e in enumerate(word_list):
+        word_list[i] = e.lower()
+    d = recurse(subreddit, word_list)
+    if d:
+        for key, value in sorted(d.items(), key=lambda x: (-x[1], x[0])):
+            print("{}: {}".format(key, value))
+    elif d is None:
+        print()
