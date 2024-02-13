@@ -1,40 +1,49 @@
 #!/usr/bin/python3
-"""GET to api"""
-import requests
+"""
+A module containing a recursive function to query the Reddit API and count
+occurrences of given keywords in the titles of hot articles for a given
+subreddit.
+"""
+from requests import get
+from sys import argv
+
+hotlist = []
+after = None
 
 
-def recurse(subreddit, word_list, after="", dic={}):
-    """recursive function"""
-    base_url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
-    h = {'User-Agent': 'Reddit API test'}
-    params = {'limit': 200, 'after': after}
-    r = requests.get(base_url, headers=h, allow_redirects=False, params=params)
-    if r.status_code != 200:
-        return None
-    d = r.json()
-    if after is None:
-        return dic
-    l = d.get('data', {}).get('children')
-    for i in l:
-        title = i.get('data', {}).get('title').lower().split()
-        for j in word_list:
-            for t in title:
-                if j == t:
-                    if j not in dic:
-                        dic[j] = 1
-                    else:
-                        dic[j] += 1
-    p = d.get('data', {}).get('after')
-    return recurse(subreddit, word_list, p, dic)
+def count_all(hotlist, word_list):
+    count_dic = {word.lower(): 0 for word in word_list}
+    for title in hotlist:
+        words = title.split(' ')
+        for word in words:
+            if count_dic.get(word) is not None:
+                count_dic[word] += 1
+
+    for key in sorted(count_dic, key=count_dic.get, reverse=True):
+        if count_dic.get(key):
+            for thing in word_list:
+                if key == thing.lower():
+                    print("{}: {}".format(thing, count_dic[key]))
 
 
 def count_words(subreddit, word_list):
-    """Cound # of keywords"""
-    for i, e in enumerate(word_list):
-        word_list[i] = e.lower()
-    d = recurse(subreddit, word_list)
-    if d:
-        for key, value in sorted(d.items(), key=lambda x: (-x[1], x[0])):
-            print("{}: {}".format(key, value))
-    elif d is None:
-        print()
+    global hotlist
+    global after
+    """subs"""
+    head = {'User-Agent': 'Dan Kazam'}
+    if after:
+        count = get('https://www.reddit.com/r/{}/hot.json?after={}'.format(
+            subreddit, after), headers=head).json().get('data')
+    else:
+        count = get('https://www.reddit.com/r/{}/hot.json'.format(
+            subreddit), headers=head).json().get('data')
+    hotlist += [dic.get('data').get('title').lower()
+                for dic in count.get('children')]
+    after = count.get('after')
+    if after:
+        return count_words(subreddit, word_list)
+    return count_all(hotlist, word_list)
+
+
+if __name__ == "__main__":
+    count_words(argv[1], argv[2].split(' '))
