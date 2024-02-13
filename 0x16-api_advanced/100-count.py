@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+A module containing a recursive function to query the Reddit API and count
+occurrences of given keywords in the titles of hot articles for a given
+subreddit.
+"""
 import requests
 
 
