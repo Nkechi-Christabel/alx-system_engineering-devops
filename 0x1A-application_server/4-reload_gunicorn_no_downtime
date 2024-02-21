@@ -1,26 +1,3 @@
 #!/usr/bin/env bash
-# Define the number of workers to gracefully shutdown
-NUM_WORKERS=2
-
-# Get the PID of the Gunicorn master process
-MASTER_PID=$(pgrep -f "gunicorn.*:app")
-
-# Check if Gunicorn is running
-if [ -z "$MASTER_PID" ]; then
-    echo "Gunicorn is not running."
-    exit 1
-fi
-
-# Gracefully shutdown a specified number of workers
-echo "Gracefully shutting down $NUM_WORKERS workers..."
-for ((i=1; i<=$NUM_WORKERS; i++)); do
-    echo "Gracefully shutting down worker $i..."
-    kill -s TERM "$MASTER_PID"
-    sleep 5
-done
-
-# Reload Gunicorn to start new workers with updated code or configuration
-echo "Reloading Gunicorn..."
-kill -s HUP "$MASTER_PID"
-
-echo "Gunicorn reloaded gracefully."
+# This script reloads Gunicorn in a graceful way.
+ps aux | grep gunicorn | awk '{ print $2 }' | xargs kill -HUP
