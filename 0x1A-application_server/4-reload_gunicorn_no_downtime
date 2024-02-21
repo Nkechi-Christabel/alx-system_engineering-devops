@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-
-
 # Define the number of workers to gracefully shutdown
 NUM_WORKERS=2
 
